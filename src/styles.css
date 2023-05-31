@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #fafafa;
+  color: #3d4852;
+  font-family: "Montserrat", sans-serif;
+}
+
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* .fileUploader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  width: 350px;
+  min-height: 400px;
+  box-sizing: border-box;
+} */
+
+.fileUploader {
+  position: relative;
+  width: 670px;
+  height: 222px;
+  background: #A7E0CF;
+  border-radius: 12px;
+}
+
+.fileUploader h4 {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.fileList {
+  display: flex;
+  margin: 10px 0;
+}
+
+.fileIcon {
+  width: 31px;
+  height: 38px;
+}
+
+.fileNameArea {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 15px;
+}
+
+.rejectedfiles {
+  opacity: 0.5;
+}
+
+.rejectedfiles .fileNameArea {
+  width: 85%;
+}
+
+.fielName {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.fielName p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.rejectedfiles .fielName p {
+  margin: 0;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 86%;
+}
+
+.fielName img {
+  width: 17px;
+  height: 17px;
+}
+
+.loader {
+  display: inline-block;
+  width: 100%;
+  background: #aaa;
+  height: 3px;
+  border-radius: 2px;
+  position: relative;
+}
+
+.loader:after {
+  content: "";
+  width: 0;
+  display: inline-block;
+  height: 3px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.loader.success {
+  background: #b2f2c9;
+}
+
+.loader.success:after {
+  background: #6cc08a;
+  width: 100%;
+  animation: loader100 1s ease-in-out;
+}
+
+.loader.danger {
+  background: #fdcbc9;
+}
+
+.loader.danger:after {
+  background: #e24139;
+  width: 50%;
+  animation: loader50 1s ease-in-out;
+}
+
+.dropzone {
+  position: absolute;
+  width: 660px;
+  height: 212px;
+  left: 3px;
+  top: 3px;
+  border: 2px dotted #1A2741;
+  border-radius: 12px;
+  cursor: pointer;
+  /* padding: 15px; */
+}
+
+/* .dropzone {
+  position: relative;
+  width: 670px;
+  height: 222px;
+  background: #A7E0CF;
+  border-radius: 12px;
+} */
+
+.dotrec {
+  position: absolute;
+  width: 660px;
+  height: 212px;
+  left: 5px;
+  top: 5px;
+  border: 2px dashed #1A2741;
+  border-radius: 12px;
+}
+
+.dropzone p {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 25px;
+  color: #3d4852;
+}
+
+.dropzone p span {
+  color: #688ee8;
+}
+
+@keyframes loader100 {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes loader50 {
+  0% {
+    width: 0;
+  }
+
+  50% {
+    width: 50%;
+  }
+}
+
+.demoTitle {
+  position: absolute;
+  width: 426px;
+  height: 64px;
+  left: calc(50% - 426px/2);
+  top: 21px;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 32px;
+  text-align: center;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  color: #1A2741;
+  margin: auto;
+}
+
+.dragHere {
+  position: absolute;
+  width: 188px;
+  height: 24px;
+  left: calc(50% - 188px/2);
+  top: 177px;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  color: #1A2741;
+  margin: auto;
+}
+
+.addBtn {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 30px;
+  gap: 8px;
+  background: center;
+  position: absolute;
+  width: 195px;
+  height: 60px;
+  left: calc(50% - 195px/2);
+  top: 101px;
+  border: 2px solid #1A2741;
+  border-radius: 6px;
+  z-index: 1;
+  /* pointer-events: auto; */
+}
+
+/* .addBtn:not(:hover) {
+  pointer-events: auto;
+} */
+
+.addBtn:hover {
+  background: #1A2741;
+  /* pointer-events: none; */
+}
+
+.addBtn:hover > span{
+  color: #fff;
+}
+
+.addBtn > span{
+  width: 106px;
+  height: 26px;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+  color: #1A2741;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin-left: 8px;
+}
