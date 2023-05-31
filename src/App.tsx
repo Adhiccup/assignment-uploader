@@ -1,29 +1,34 @@
 import React, { useState, Fragment } from "react";
 import "./styles.css";
 import { Container, Row, Col } from "react-bootstrap";
-import { useDropzone } from "react-dropzone";
+import { useDropzone, FileRejection } from "react-dropzone";
 import { map, filter, isEmpty } from "lodash";
-import pdfIcon from "./images/icon-file-pdf.svg";
-import jpgIcon from "./images/icon-file-jpg.svg";
-import pngIcon from "./images/icon-file-png.svg";
-import checkIcon from "./images/icon-check.svg";
-import closeIcon from "./images/icon-close.svg";
-import iconWord from "./images/icon-word.svg";
+const iconWord = require('./images/icon-word.svg');
 
-export default function App() {
+interface File {
+  name: string;
+  type: string;
+  preview?: string;
+}
 
+interface FileError {
+  code: string;
+  message: string;
+  type: string;
+}
+
+interface Props { }
+
+const App: React.FC<Props> = () => {
   const fileIcons = [
-    { type: "application/pdf", icon: pdfIcon },
-    { type: "image/png", icon: pngIcon },
-    { type: "image/jpeg", icon: jpgIcon },
-    { type: "image/jpg", icon: jpgIcon }
+    { type: "*", icon: iconWord }
   ];
 
-  const [dropFiles, setDropFiles] = useState();
+  const [dropFiles, setDropFiles] = useState<File[] | undefined>();
   const maxLength = 20;
-  const filesArray = [];
+  const filesArray: string[] = [];
 
-  const fileValidator = (file) => {
+  const fileValidator = (file: File): FileError | null => {
     filesArray.push(file.name);
     console.log(
       "fileValidator",
@@ -51,7 +56,7 @@ export default function App() {
     accept: ".jpeg, .jpg, .png, .pdf",
     // accept: "*",
     validator: fileValidator,
-    onDrop: (acceptedFiles) => {
+    onDrop: (acceptedFiles: any[]) => {
       setDropFiles(
         acceptedFiles.map((file) =>
           Object.assign(file, {
@@ -62,7 +67,7 @@ export default function App() {
     }
   });
 
-  const filesList = map(dropFiles, (list) => {
+  const filesList = map(dropFiles, (list: File) => {
     const getIcon = filter(fileIcons, (o) => o.type === list.type);
     return (
       <div className="fileList" key={list.name}>
@@ -76,31 +81,9 @@ export default function App() {
         <div className="fileNameArea">
           <div className="fielName">
             <p>{list.name}</p>
-            <img src={checkIcon} className="status-icon" alt="file status" />
+            {/* <img src={checkIcon} className="status-icon" alt="file status" /> */}
           </div>
           <div className="loader success" />
-        </div>
-      </div>
-    );
-  });
-
-  const fileRejectionItems = fileRejections.map(({ file, errors }) => {
-    const getIcon = filter(fileIcons, (o) => o.type === file.type);
-    return (
-      <div className="fileList rejectedfiles" key={file.path}>
-        {typeof getIcon !== "undefined" && !isEmpty(getIcon) ? (
-          <div className="fileIconArea">
-            <img className="fileIcon" src={getIcon[0].icon} alt={file.name} />
-          </div>
-        ) : (
-          <Fragment />
-        )}
-        <div className="fileNameArea">
-          <div className="fielName">
-            <p>{file.name}</p>
-            <img src={closeIcon} className="status-icon" alt="file status" />
-          </div>
-          <div className="loader danger" />
         </div>
       </div>
     );
@@ -123,9 +106,7 @@ export default function App() {
             </p>
             <button className="addBtn" onClick={tempDrop}>
               <img src={iconWord} alt="" />
-              <span>
-                Add file(s)
-              </span>
+              <span>Add file(s)</span>
             </button>
             <p className="dragHere">or drop document(s) here</p>
 
@@ -133,25 +114,25 @@ export default function App() {
               <input {...getInputProps()} id="file_drop" />
             </div>
           </div>
-
-
         </div>
 
         <br></br>
 
         <div className="fileUploader">
           <div className="dropzone">
-            
+
           </div>
         </div>
 
-          {/* <Row>
-            <Col>{filesList}</Col>
-          </Row> */}
         {/* <Row>
-          <Col>{fileRejectionItems}</Col>
-        </Row> */}
+        <Col>{filesList}</Col>
+      </Row> */}
+        {/* <Row>
+      <Col>{fileRejectionItems}</Col>
+    </Row> */}
       </Container>
     </div>
   );
-}
+};
+
+export default App;
